@@ -17,14 +17,11 @@ class Controller extends Model {
                     include 'Views/index.php';
                     break;
                 case '/register':
-                    include 'Views/header.php';
-                    include 'Views/register.php';
-                    include 'Views/footer.php';
                     // 10 start code for register form
                     if (isset($_POST['register'])) {
 
                         // set image path and make unique img name and extension
-                        $path = 'includes/img/';
+                        $path = 'uploads/';
                         $extension = pathinfo($_FILES['profile']['name'],PATHINFO_EXTENSION);
                         $file_name = $_POST['firstname'].'_'.date('YmdHms').'.'.$extension;
                         
@@ -36,7 +33,8 @@ class Controller extends Model {
                             'fname' => $_POST['firstname'],
                             'lname' => $_POST['lastname'],
                             'email' => $_POST['email'],
-                            'password' => $_POST['password'],
+                            // 16 hash password
+                            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                             'contact' => $_POST['contact'],
                             'gender' => $_POST['gender'],
                             'adress' => $_POST['address'],
@@ -46,8 +44,41 @@ class Controller extends Model {
                         ];
                         // 12 set value in hthe insert function head
                         $insertEx = $this->InsertData('user', $insert_data);
+                        // 15 show alert for insert
+                        if ($insertEx['Code']) {
+                            // then file upload to folder
+                            if (!is_null($profile)) {
+                                move_uploaded_file($_FILES['profile']['tmp_name'],$path.$file_name);
+                            }
+                            ?>
+                            <script type="text/javascript">
+                                // show alert
+                                alert("<?php echo $insertEx['Message'] ?>");
+                                // redirect then
+                                window.location.href='login';
+                            </script>
+                            <?php
+                        }else{
+                            ?>
+                            <script type="text/javascript">
+                                // show alert
+                                alert("<?php echo $insertEx['Message'] ?>");
+                                // redirect then
+                                window.location.href='register';
+                            </script>
+                            <?php                            
+                        }
+                        // echo "<pre>";
+                        // print_r($insertEx);
                         exit;
-                        }               
+                    } 
+                    include 'Views/header.php';
+                    include 'Views/register.php';
+                    include 'Views/footer.php';
+                    break;
+                case '/login':  
+                    echo "<h1> this is login page </h1>";
+                    break;
                 default:
                     
                     break;

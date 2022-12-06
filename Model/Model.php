@@ -21,18 +21,23 @@ class Model {
     }
     // 11 insert query for register form
     function InsertData ($table, $data){
-        //insert into tablename (columns) VALUES (values);
         $columns = implode(',',array_keys($data));
         $values = implode("','",array_values($data));
         $sql = "insert into $table ($columns) values ('$values')";
         //echo $sql;
         // 13 exicute query now
         $insertEx = $this->connection->query($sql);
+        // 14 response function for mssage
         if ($insertEx) {
             $response['Data'] = null;
             $response['Code'] = true;
             $response['Message'] = 'Data Inserted Successfully';
+        }else{
+            $response['Data'] = null;
+            $response['Code'] = true;
+            $response['Message'] = 'Data Insertion faild';            
         }
+        return $response;
     }
 }
 
