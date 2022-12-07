@@ -34,10 +34,61 @@ class Model {
             $response['Message'] = 'Data Inserted Successfully';
         }else{
             $response['Data'] = null;
-            $response['Code'] = true;
+            $response['Code'] = false;
             $response['Message'] = 'Data Insertion faild';            
         }
         return $response;
+    }
+    // 19 make query for login form
+    function loginData ($email, $password){
+        $loginSql = "SELECT * FROM user WHERE email = '$email'";
+        $loginEx = $this->connection->query($loginSql);
+        // then fetch data from object
+        $loginData = $loginEx->fetch_object();
+        // password verify and alert show for work verify must use password 255 character in database
+        if($loginEx->num_rows > 0 && password_verify($password,$loginData->password)){            
+            $response['Data'] = $loginData; // set logindata here for work with session
+            $response['Code'] = true;
+            $response['Message'] = 'Login Successfully';
+        }else{
+            $response['Data'] = null;
+            $response['Code'] = false;
+            $response['Message'] = 'Login faild! Email or Password Incorrect';            
+        }
+        return $response;
+    }
+    // 29 fetch data for user
+    function selectData(string $tableName, array $where = []){
+        $selectSql = "SELECT * FROM $tableName";
+        if (!empty($where)) {
+            $selectSql .= " WHERE ";
+            foreach ($where as $key => $value) {
+               $selectSql .= " $key = '$value' AND";
+            }
+            $selectSql = rtrim($selectSql, 'AND');
+        }
+        $sqlEx = $this->connection->query($selectSql);
+
+        if ($sqlEx->num_rows > 0) {
+            // loop for fetch data
+            while ($fetchData = $sqlEx->fetch_object()) {
+                // get in array
+                $allData[] = $fetchData;
+            }
+            //alert
+            $response['Data'] = $allData;
+            $response['Code'] = true;
+            $response['Message'] = 'Data Retrieved Successfully';
+
+        }else{
+            $response['Data'] = [];
+            $response['Code'] = false;
+            $response['Message'] = 'Data not Retrieved';
+
+        }
+        return $response;
+
+        
     }
 }
 

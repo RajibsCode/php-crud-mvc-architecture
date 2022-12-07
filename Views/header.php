@@ -17,8 +17,20 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand me-auto" href="#">Users Data</a>
-            <a class="btn btn-primary logout-button" href="login.php">Login Now</a>
-
+            <?php
+            // 24 dynamic logout button and then logout in controller.php
+            if (isset($_SESSION['user_data'])) {
+              echo '<a class="btn btn-primary" href="logout">Logout</a>';
+            }else{
+              // 17 dynamic header button and then code for login in controler.php
+              if ($_SERVER['PATH_INFO'] == '/login') {
+                echo '<a class="btn btn-primary" href="register">Register Now</a>';
+              }elseif ($_SERVER['PATH_INFO'] == '/register') {
+                echo '<a class="btn btn-primary" href="login">Login Now</a>';
+              }
+            }
+            
+            ?>
           </div>
         </div>
       </nav>
