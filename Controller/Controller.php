@@ -171,8 +171,12 @@ class Controller extends Model {
                         </script>
                         <?php
                     }
-                    include 'Views/header.php';
+                      
+                    // 30 for fetch admin and show in admin.php
+                    $selectData = $this->selectData('user');
 
+                    include 'Views/header.php';
+                    include 'Views/admin.php';
                     include 'Views/footer.php';
                     break;
                 

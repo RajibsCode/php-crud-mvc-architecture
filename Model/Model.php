@@ -57,7 +57,7 @@ class Model {
         }
         return $response;
     }
-    // 29 fetch data for user
+    // 29 fetch data for user then show in user.php
     function selectData(string $tableName, array $where = []){
         $selectSql = "SELECT * FROM $tableName";
         if (!empty($where)) {

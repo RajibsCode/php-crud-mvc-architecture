@@ -1,3 +1,16 @@
+<?php
+//  code for full form data for state
+// $states = [
+//   'gj' => 'Gujrat',
+//   'dl' => 'Delhi',
+//   'rj' => 'Rajasthan',
+//   'mh' => 'Maharashtra',
+//   'sk' => 'Sikkim',
+//   'pb' => 'Punjab',
+// ];
+
+?>
+
 <section class="vh-100" style="background-color: #f4f5f7;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -6,7 +19,7 @@
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center text-white"
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+              <img src="<?php echo 'uploads/' . $selectData['Data'][0]->profile; ?>"
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
               <h5>Marie Horwitz</h5>
               <p>Web Designer</p>
@@ -18,30 +31,54 @@
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
-                    <h6>Email</h6>
-                    <p class="text-muted">info@example.com</p>
+                    <h6>Name</h6>
+                    <p class="text-muted"><?php echo $selectData['Data'][0]->fname . " " .$selectData['Data'][0]->lname; ?></p>
+                  </div>                 
+                  <div class="col-6 mb-3">
+                    <h6>Email Adress</h6>
+                    <p class="text-muted"><?php echo $selectData['Data'][0]->email;?></p>
                   </div>
                   <div class="col-6 mb-3">
-                    <h6>Phone</h6>
-                    <p class="text-muted">123 456 789</p>
-                  </div>
-                </div>
-                <h6>Projects</h6>
-                <hr class="mt-0 mb-4">
-                <div class="row pt-1">
-                  <div class="col-6 mb-3">
-                    <h6>Recent</h6>
-                    <p class="text-muted">Lorem ipsum</p>
+                    <h6>Contact Number</h6>
+                    <p class="text-muted"><?php echo $selectData['Data'][0]->contact;?></p>
                   </div>
                   <div class="col-6 mb-3">
-                    <h6>Most Viewed</h6>
-                    <p class="text-muted">Dolor sit amet</p>
+                    <h6>Gender</h6>
+                    <p class="text-muted"><?php echo $selectData['Data'][0]->gender;?></p>
                   </div>
-                </div>
-                <div class="d-flex justify-content-start">
-                  <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                  <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                  <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  <div class="col-6 mb-3">
+                    <h6>Adress</h6>
+                    <p class="text-muted"><?php echo $selectData['Data'][0]->adress;?></p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>State</h6>
+                    <p class="text-muted">
+                      <?php
+                        if ($selectData['Data'][0]->state == 'gj') {
+                          echo "Gujrat";
+                        }
+                        if ($selectData['Data'][0]->state == 'dl') {
+                          echo "Delhi";
+                        }
+                        if ($selectData['Data'][0]->state == 'rj') {
+                          echo "Rajasthan";
+                        }
+                        if ($selectData['Data'][0]->state == 'mh') {
+                          echo "Maharashtra";
+                        }
+                        if ($selectData['Data'][0]->state == 'sk') {
+                          echo "Sikkim";
+                        }
+                        if ($selectData['Data'][0]->state == 'pb') {
+                          echo "Punjab";
+                        }
+                      ?>
+                    </p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Hobbies</h6>
+                    <p class="text-muted"><?php echo $selectData['Data'][0]->hobbies;?></p>
+                  </div>
                 </div>
               </div>
             </div>
