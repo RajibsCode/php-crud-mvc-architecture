@@ -1,16 +1,3 @@
-<?php
-//  code for full form data for state
-// $states = [
-//   'gj' => 'Gujrat',
-//   'dl' => 'Delhi',
-//   'rj' => 'Rajasthan',
-//   'mh' => 'Maharashtra',
-//   'sk' => 'Sikkim',
-//   'pb' => 'Punjab',
-// ];
-
-?>
-
 <section class="vh-100" style="background-color: #f4f5f7;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -21,13 +8,12 @@
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
               <img src="<?php echo 'uploads/' . $selectData['Data'][0]->profile; ?>"
                 alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-              <h5>Marie Horwitz</h5>
-              <p>Web Designer</p>
               <i class="far fa-edit mb-5"></i>
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">
                 <h6>Information</h6>
+                <a href="admin_update?user=<?php echo $selectData['Data'][0]->id; ?>">Edit Your Information</a>
                 <hr class="mt-0 mb-4">
                 <div class="row pt-1">
                   <div class="col-6 mb-3">

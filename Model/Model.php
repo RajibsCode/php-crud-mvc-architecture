@@ -90,6 +90,27 @@ class Model {
 
         
     }
+    // 32 update admin query
+    function updateData($table, $data, $where){
+        if ($user_data) {
+            // make sql query
+            $sql = "UPDATE $table SET ";
+            foreach ($data as $key => $value) {
+                $sql .= "$key = '$value',";
+            }
+            $sql = rtrim($sql,',');
+            $sql .= " WHERE ";
+
+            foreach ($where as $key => $value) {
+                $sql .= "$key = '$value' AND";
+            }
+            $sql = rtrim($sql,'AND');
+            return $updateEx = $this->connection->query($sql);
+        }else{
+
+        }
+
+    }
 }
 
 ?>

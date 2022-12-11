@@ -39,10 +39,10 @@
             <td>
             <p style="color:tomato;border:2px solid tomato;border-radius:50px;text-align:center;padding:5px 10px">
             <?php
-             if($user->roll_id == 0){
+             if($user->role_id == 0){
                 echo "User";
              }
-             if($user->roll_id == 1){
+             if($user->role_id == 1){
                 echo "Admin";
              }
              ?>
@@ -78,8 +78,8 @@
             <td><?php echo $user->hobbies; ?></td>
             <td><img src="<?php echo 'uploads/' . $user->profile;?>" alt="" width="50px"></td>
             <td>
-                <a href="update.php?user=<?php echo $user->id; ?>" class="btn btn-warning edit-button">Edit</a>
-                <a href="delete.php?user=<?php echo $user->id; ?>" class="btn btn-danger delete-button" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
+                <a href="admin_update?user=<?php echo $user->id; ?>" class="btn btn-warning edit-button">Edit</a>
+                <a href="delete?user=<?php echo $user->id; ?>" class="btn btn-danger delete-button" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a>
             </td>
           </tr>
           <?php
