@@ -13,10 +13,13 @@ class Controller extends Model {
         // 9 set path in server
         if (isset($_SERVER['PATH_INFO'])) {
             switch ($_SERVER['PATH_INFO']) {
-                case '/index':
-                    include 'Views/index.php';
+                case '/':
+                    header('Location:login');
                     break;
                 case '/register':
+                    if (isset($_SESSION['user_data'])) {
+                        header('Location:login');
+                      }
                     // 10 start code for register form
                     if (isset($_POST['register'])) {
 
@@ -180,18 +183,15 @@ class Controller extends Model {
                     include 'Views/footer.php';
                     break;
                 case '/admin_update':
+                    
+                    if (!isset($_SESSION['user_data'])) {
+                        header('Location:login');
+                      }
                     // 31 update users data and then query in model.php
                     // fetch first by get method
                     $where = ['id' => $_GET['user']];
-                    $selectData = $this->selectData('user', $where);
-                    $user_data = $selectData['Data'][0];
-                    if (!$user_data) {
-                        ?>
-                        <script type="text/javascript">
-                        window.location.href='login';
-                        </script>
-                        <?php
-                    }
+                    $user_data = $this->selectData('user', $where);
+                    $user_data = $user_data['Data'][0];
 
 
                     // update - form data update
@@ -251,8 +251,23 @@ class Controller extends Model {
                     include 'Views/admin_update.php';
                     include 'Views/footer.php';
                     break;
+                case '/delete':
+                    // 34 delete data code and then makefuction in model
+                    if (isset($_GET['user'])) {
+                        $where = ['id' => $_GET['user']];
+                        // 36 set function head
+                        $deleteData = $this->deleteData('user', $where);
+                        ?>
+                        <script type="text/javascript">
+                        alert("Data Deleted Successfully!");
+                        window.location.href='login';
+                        </script>
+                        <?php
+                    }
+                    include 'Views/delete.php';
+                    break;
                 default:
-                    
+                   
                     break;
             }
         }

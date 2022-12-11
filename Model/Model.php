@@ -92,7 +92,6 @@ class Model {
     }
     // 32 update admin query
     function updateData($table, $data, $where){
-        if ($user_data) {
             // make sql query
             $sql = "UPDATE $table SET ";
             foreach ($data as $key => $value) {
@@ -106,10 +105,16 @@ class Model {
             }
             $sql = rtrim($sql,'AND');
             return $updateEx = $this->connection->query($sql);
-        }else{
 
+    }
+    // 35 delete query
+    function deleteData($table, $where){
+        $sql = "DELETE FROM $table WHERE ";
+        foreach ($where as $key => $value) {
+            $sql .=" $key = '$value'";
         }
-
+        // execute query
+        return $deleteEx = $this->connection->query($sql);
     }
 }
 
